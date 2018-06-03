@@ -1,5 +1,22 @@
+import keras
+import numpy
+
 def init():
-    print('hello')
+    predict_by_dense_layer()
+
+def predict_by_dense_layer():
+    x = numpy.array([0, 1, 2, 3, 4])
+    y = x * 2 + 1
+
+    model = keras.models.Sequential()
+
+    model.add(keras.layers.Dense(1, input_shape=(1,)))
+    model.compile('SGD', 'mse')
+
+    model.fit(x[:2], y[:2], epochs=1000, verbose=0)
+
+    print('Targets :', y[2:])
+    print('Predictions :', model.predict(x[2:]).flatten())
 
 # implementation
 if __name__ == '__main__':
